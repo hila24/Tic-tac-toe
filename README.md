@@ -22,3 +22,7 @@ stage 1
 then they ask you to run on onther local host say yes
 
 
+![create a game](https://user-images.githubusercontent.com/43778148/131251648-f1811983-bf9d-41df-8976-f63660c65f02.png)
+
+
+
