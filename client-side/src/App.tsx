@@ -13,17 +13,17 @@ function App() {
         console.log("Error: ", err);
       });
   };
-  useEffect (()=>{
+  useEffect(() => {
     connectSocket()
     history.push('/joinedGame');
-  },[])
+  }, [])
   return (
     <div className="App">
-       <Router history={history}>
-     <h1>tic tac tie </h1>
- <Route exact path="/joinedGame" component={JoinedGame} />
- <Route exact path="/game" component={BoardGame} />
- </Router>
+      <Router history={history}>
+        <h1>Tic-tac-toe </h1>
+        <Route exact path="/joinedGame" component={JoinedGame} />
+        <Route exact path="/game" component={BoardGame} />
+      </Router>
     </div>
   );
 }
