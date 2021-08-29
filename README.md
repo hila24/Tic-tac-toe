@@ -31,7 +31,9 @@ run npm start
 
 ![image](https://user-images.githubusercontent.com/43778148/131252470-40288e83-0c0b-4ed9-a1d9-b7424f2486a8.png)
 
-stage 4
+***in case npm start run npm install react-scripts --save and try again
+
+stage 5
 open new command line 
 go into ti-tac-tie/client-side
 run npm start
@@ -42,20 +44,22 @@ run npm start
 HOW TO PLAY:
 
 stage 1
- open the command line
- go in to ti-tac-tie/server-side
- run npm start
+go to one of The pages that opened
+ Insert name to the Create a new game input and press the button
+ ![creatingG](https://user-images.githubusercontent.com/43778148/131252862-7813bac8-6d41-45fe-bb4e-b90f82912f90.png)
+
+ 
 
  stage 2
- open onther the command line
- go in to ti-tac-tie/client-side
- run npm start
+ go to the other one from The pages that opened
+ Insert the same name you insert to the first one to Join game and press the button
+ ![joinG](https://user-images.githubusercontent.com/43778148/131252884-975fb4a4-6cee-47fa-8f25-1f8f5d8c8648.png)
 
- stage 3
- open onther the command line
- go in to ti-tac-tie/client-side
- run npm start
-then they ask you to run on onther local host say yes
+
+stage 3 
+play at your turn
+ 
+ **to play again reload both pages and insert new name
 
 
 
