@@ -1,0 +1,162 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('ticcc:server');
+var http = require('http');
+var {OnConnect, SocketController, ConnectedSocket, OnDisconnect, MessageBody, OnMessage}= require ("socket-controllers");
+// var socketServer =require("../socket.ts")
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '9000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+const io = require('socket.io')(server,{cors: {
+  origin: "*",
+}});
+
+let turnOnSocketIo =require("./socketServer")
+turnOnSocketIo(io);
+// let roomsOfGames ={}
+// let game ={player1:"",player2:"",cubesPlayer1:[],cubesPlayer2:[]}
+
+// io.on('connection', client => {
+//   client.on('createAgame', data => { //Listens to a player create the game
+// let createAgame =false
+//    if(! Object.keys(roomsOfGames).includes(data.nameGame) ){
+//      roomsOfGames[data.nameGame]={player1:"",player2:"",cubesPlayer1:[],cubesPlayer2:[]}
+//      roomsOfGames[data.nameGame]["player1"]=client.id
+//      createAgame=true;
+//     }
+//   io.emit("responseCreate_game", { "createGame": createAgame });
+//    });
+
+//   client.on('join_game', data => { //Listens to a player join the game
+//     let joinAgame=false
+//     if( Object.keys(roomsOfGames).includes(data.nameGame) ){
+//       if(roomsOfGames[data.nameGame]["player1"]!=client.id&&roomsOfGames[data.nameGame]["player2"]==""){
+//       roomsOfGames[data.nameGame]["player2"]=client.id
+//       joinAgame=true
+//       io.to(roomsOfGames[data.nameGame]["player1"]).emit('player2Joined');
+//     }    
+//    }
+
+//       io.emit("responseJoined_game", { "joinedGame": joinAgame });
+    
+//    });
+//    client.on('myMove', (data) => {//Listens when a player makes a move
+//      let currentPlayerCubes ="cubesPlayer2"
+//      let toWhoSend ="player1"
+//      if (data.currentPlayer=="x"){
+//      currentPlayerCubes="cubesPlayer1"
+//      toWhoSend="player2"
+//     }
+//     roomsOfGames[data.nameGame][currentPlayerCubes].push(data.boxId)
+//     let resultOfGame=tictactie(roomsOfGames[data.nameGame]["cubesPlayer1"],roomsOfGames[data.nameGame]["cubesPlayer2"])
+//     if(resultOfGame!==""){
+//       io.to(roomsOfGames[data.nameGame]["player1"]).emit("endGame",resultOfGame)
+//       io.to(roomsOfGames[data.nameGame]["player2"]).emit("endGame",resultOfGame)
+//     } 
+//     io.to(roomsOfGames[data.nameGame][toWhoSend]).emit('otherplayerMove',{"boxId":data.boxId,"currentPlayer":data.currentPlayer});
+//     });
+//   client.on('disconnect', () => { /* … */ });
+// });
+// function tictactie(cubesPlayer1,cubesPlayer2) {//checking if someone win and in case return who win or tie
+// const winningConditions = [
+//   [0, 1, 2],
+//   [3, 4, 5],
+//   [6, 7, 8],
+//   [0, 3, 6],
+//   [1, 4, 7],
+//   [2, 5, 8],
+//   [0, 4, 8],
+//   [2, 4, 6]
+// ];
+
+// for(let i=0;i<winningConditions.length;i++){
+// if(  winningConditions[i].every(v => cubesPlayer1.includes(v))){
+// return "x"}
+// if(  winningConditions[i].every(v => cubesPlayer2.includes(v)))
+// return "o"
+// }
+// if(cubesPlayer1.length+cubesPlayer2.length===9)
+// return "tie"
+
+// return ""
+// }
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
