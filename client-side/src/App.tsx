@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Router, Route, Link } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
-import { io } from "socket.io-client";
 import JoinedGame from "./joinedGame";
 import SocketService from "./socketclient"
 import history from './history';

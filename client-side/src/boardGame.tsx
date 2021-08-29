@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { io,Socket } from "socket.io-client";
-// import { io,Socket } from "socket.io-client";
 import socketService from "./socketclient";
-import { useHistory } from "react-router-dom";
-// import { updateOptionalTypeNode } from 'typescript';
 function BoardGame() {
     const [updating, setUpdating] = useState("");
     const [myTurn, setMyTurn] = useState(false);
@@ -25,22 +21,20 @@ const styleTable= {
     "marginLeft": "37%",
     "alignContent": "center"
 }
-    // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         if(socketService.currentPlayer =="x")
         setMyTurn(true)
     },[]);
     useEffect(() => {
-
         let socket = socketService.socket
         if(!socket)
         return;
         socket.on('endGame', result => {//Listening if the game is over
             setEndGame(true)
           if(result===socketService.currentPlayer )
-           return  setStatus("you winn")
+           return  setStatus("you win!")
           if(result==="x"||result==="o")
-           return setStatus("you lose")
+           return setStatus("you lose!")
           if(result=="tie")
            return  setStatus("its tie")
            console.log("end game")
@@ -51,6 +45,7 @@ const styleTable= {
             return;
             setMyTurn(true)
             let tempTable=table
+
             let sighnIftheOtherplayer
             if(socketService.currentPlayer ==="x")
              sighnIftheOtherplayer="o"
@@ -59,9 +54,8 @@ const styleTable= {
             tempTable[data.boxId]=sighnIftheOtherplayer 
             setTable(tempTable)
             setUpdating(data.boxId)
-          
-
         })
+       
     },[]);
     const nextMove =async (e: React.ChangeEvent<any>)=>{//the player made move its emit to the server the move
         if(!myTurn||endGame)
@@ -78,12 +72,16 @@ const styleTable= {
         try {
             if(!socket) 
            return;
-            await  socket.emit("myMove", { "boxId":boxId ,"nameGame":socketService.nameGame,"currentPlayer":socketService.currentPlayer });
+            await  socket.emit("myMove", { 
+                "boxId":boxId ,
+                "nameGame":socketService.nameGame,
+                "currentPlayer":socketService.currentPlayer });
              } catch (error) {
                console.error(error);
             
              }
     }
+   
    
    
     return (
@@ -109,9 +107,8 @@ const styleTable= {
         </tbody>
     </table>
     </div>
-    <h1>{status}</h1>
-    <p>{(myTurn&&!endGame) && <h1>you turn</h1>}</p>
-
+    <h1>{ status}</h1>
+    <div>{(myTurn&&!endGame) && <h1>you turn</h1>}</div>
 
         </div>
     );

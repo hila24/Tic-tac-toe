@@ -1,5 +1,8 @@
 This project was project is a game tic tac tie 
 
+HOW TO INSTALL
+
+
 To play:
 
 stage 1
@@ -17,3 +20,5 @@ stage 1
  go in to ti-tac-tie/client-side
  run npm start
 then they ask you to run on onther local host say yes
+
+

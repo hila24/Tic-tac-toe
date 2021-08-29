@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import { io,Socket } from "socket.io-client";
-// import { io,Socket } from "socket.io-client";
 import socketService from "./socketclient";
-import { useHistory } from "react-router-dom";
 import history from './history';
-// import { updateOptionalTypeNode } from 'typescript';
 function JoinedGame() {
     const [nameGame, setNameGame] = useState("");
     const [createGame, setCreateGame] = useState("");
