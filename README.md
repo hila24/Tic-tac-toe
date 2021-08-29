@@ -37,9 +37,10 @@ stage 5
 open new command line 
 go into ti-tac-tie/client-side
 run npm start
+then write yes
 ![image](https://user-images.githubusercontent.com/43778148/131252474-adf863e8-2536-440c-bffe-3678335f28f8.png)
 ![run on onther port](https://user-images.githubusercontent.com/43778148/131252529-171f13aa-901d-4389-b950-9b98f67eff6b.png)
-write yes
+
 
 
 HOW TO PLAY:
